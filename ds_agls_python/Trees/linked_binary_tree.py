@@ -55,3 +55,21 @@ class LinkedBinaryTree(BinaryTree):
         node  = self._validate(p)
         return  self._make_position(node._right)
 
+    def num_children(self,p):
+        node = self._validate(p)
+        count = 0
+        if  node._left is not None:
+            count +=1
+        if node._right is not None:
+            count +=1
+        return count
+
+    def _add_root(self,e):
+        if self._root  is not None:
+            raise ValueError('Root exists')
+        self._size =1
+        self._root = self._Node(e)
+        return self._make_position(self._root)
+    def _add_left(self,p,e):
+        node = self._validate(p)
+        if node
