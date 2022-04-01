@@ -1,4 +1,7 @@
 #4.1.RouteBetween2Nodes
+from difflib import Match
+import math
+from operator import truediv
 from queue import Queue
 from typing import List
 from graph import Graph
@@ -77,6 +80,23 @@ def create_level_linked_list(root):
     root = List()
     create_level_linked_list(root,root,0)
 
+#4.4 Check Balanced
+def get_height(root):
+    if (root == None): 
+        return -1
+    return 1 + (get_height(root._left) if get_height(root._left) > get_height(root._right) else  get_height(root._right) )    
+
+def isBalanced(root):
+    if root == None:
+        return True
+    height_diff = get_height(root._left) - get_height(root._right)
+    if abs(height_diff) > 1:
+        return False
+    else:
+        return isBalanced(root._right) & isBalanced(root._left)    
+
+
+# Validate BST
 
 
 
