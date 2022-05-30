@@ -95,14 +95,47 @@ def binary_search_array(start,end,array,value,min_index):
 def closest_not_empty_string_index(current_index,array):
     if array[current_index] !="":
         return current_index,current_index
-    left   = 0
-    right = 0
-    for i range 
+    left   = -1
+    right = -1
+    for i in range(1,current_index+1):
+        if array[current_index-i] !="":
+            left = current_index -i
+            break
+    for i in range(1,len(array) -current_index+1-1):
+        if array[current_index+i] !="":
+            right = current_index +i
+            break
+    return left,right        
+  
 
-def find_string_interset(str_arry):
-    closest_not_empty()
+def find_string_interset(array,value,start,end):
+    if start >end:
+        return -1
+    middle = int((start + end)/2)
+    print("middle:{}".format(middle))
+    if array[middle] == value:
+        return middle
+    
+  
+    lef_index,right_index = closest_not_empty_string_index(middle,array)
+    
+    print("lef_index:{}--right_index:{}".format(lef_index,right_index))
+
+    if  value <= array[lef_index]:
+        return find_string_interset(array,value,start,lef_index) 
+    
+    if array[lef_index] <value and value < array[right_index]:
+        return -1
+    
+    if array[right_index] <= value:
+        return find_string_interset(array,value,right_index,end)
 
 
-rotatedSortedArray = [5, 6, 7, 1, 2, 3, 4]
-index = search_rotated_array(rotatedSortedArray,4)
+#rotatedSortedArray = [5, 6, 7, 1, 2, 3, 4]
+#index = search_rotated_array(rotatedSortedArray,4)
+#print(index)
+
+array = ["at","","","","ball","","","","car"]
+
+index = find_string_interset(array,"car",0,len(array)-1)
 print(index)
