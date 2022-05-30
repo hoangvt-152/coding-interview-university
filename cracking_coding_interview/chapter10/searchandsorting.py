@@ -72,23 +72,37 @@ def get_index_of_min_item(array):
     return min_item_index        
 def search_rotated_array(array,value):
     min_item_index = get_index_of_min_item(array)
-    index = binary_search_array(min_item_index,len(array)+ min_item_index -1,array,value)
+    index = binary_search_array(min_item_index,len(array)+ min_item_index -1,array,value,min_item_index)
     return index
 
-def binary_search_array(start,end,array,value):
-    middle = (int((start + end)/2) + 1) % len(array)
+def binary_search_array(start,end,array,value,min_index):
+    middle = int((start + end)/2) % len(array)
     if start > end: 
         return -1
 
     if value == array[middle]:
         return middle
+    new_start = middle    
+    if middle < min_index:
+        new_start = middle + len(array)    
     if value < array[middle]:
-        return binary_search_array(start,middle-1,array,value)
+        return binary_search_array(start,new_start-1,array,value,min_index)
     else:  
-        return binary_search_array(middle+1,end,array,value)       
+        return binary_search_array(new_start+1,end,array,value,min_index)       
 
+
+#10.5
+def closest_not_empty_string_index(current_index,array):
+    if array[current_index] !="":
+        return current_index,current_index
+    left   = 0
+    right = 0
+    for i range 
+
+def find_string_interset(str_arry):
+    closest_not_empty()
 
 
 rotatedSortedArray = [5, 6, 7, 1, 2, 3, 4]
-index = search_rotated_array(rotatedSortedArray,3)
+index = search_rotated_array(rotatedSortedArray,4)
 print(index)
