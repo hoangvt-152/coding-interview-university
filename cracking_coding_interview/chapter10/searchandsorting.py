@@ -135,6 +135,55 @@ def find_string_interset(array,value,start,end):
 #index = search_rotated_array(rotatedSortedArray,4)
 #print(index)
 
+#10.8 sortedMatrixSearch
+
+
+def  binary_search_matrix(matrix,value,col1,col2,row1,row2):
+    pass
+class Point:
+    def __init__(self,x,y) -> None:
+        self.x = x
+        self.y = y
+    def __eq__(self, __o: object) -> bool:
+        return self.x == __o.x and self.y == __o.y    
+            
+def sortedMatrixSearch(matrix,point1,point2,value):
+    result = list()
+    if matrix[point1.x][point1.y] > value or value > matrix[point2.x][point2.y]:
+        return result
+    if point1 == point2:
+        if matrix[point1.x][point1.y] == value:
+            result.append(point1)
+        return result
+
+    x = int((point1.x + point2.x)/2)
+    y = int((point1.y + point2.y)/2)
+    
+    if matrix[x][y] == value:
+        r1 = sortedMatrixSearch(matrix,Point(x,point1.y),Point(point2.x,y),value)
+        r2 = sortedMatrixSearch(matrix,Point(point1.x,y),Point(x,point2.y),value)
+        return result + r1 + r2
+
+    if matrix[x][y] > value:
+        r1 = sortedMatrixSearch(matrix,Point(x,point1.y),Point(point2.x,y),value)
+        r2 = sortedMatrixSearch(matrix,Point(point1.x,y),Point(x,point2.y),value)
+        r3 = sortedMatrixSearch(matrix,point1,Point(x,y),value)
+        return result + r1 + r2 +r3
+    if matrix[x][y] < value:
+        r1 = sortedMatrixSearch(matrix,Point(x,point1.y),Point(point2.x,y),value)
+        r2 = sortedMatrixSearch(matrix,Point(point1.x,y),Point(x,point2.y),value)
+        r3 = sortedMatrixSearch(matrix,Point(x,y),point2,value)
+        return result + r1 + r2 +r3    
+
+A = [[1 ],
+      [],
+      [],
+      [],
+      ]        
+
+
+         
+
 array = ["at","","","","ball","","","","car"]
 
 index = find_string_interset(array,"car",0,len(array)-1)
